@@ -9,18 +9,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace eLibrary1.Controllers
 {
-    public class AssuntosController : Controller
+    public class CategoriasController : Controller
     {
         public BancoDbContext Banco { get; set; }
 
-        public AssuntosController(BancoDbContext banco){
+        public CategoriasController(BancoDbContext banco){
             this.Banco = banco;
         }    
 
         public IActionResult Index()
         {
-            return View(this.Banco.Assuntos.ToList());
+            return View(this.Banco.Categorias.ToList());
         }
+
+
         public IActionResult Create()
         {
             return View();
@@ -28,49 +30,49 @@ namespace eLibrary1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Assunto assunto)
+        public IActionResult Create(Categoria categoria)
         {
             if (ModelState.IsValid)
             {
-                this.Banco.Assuntos.Add(assunto);
+                this.Banco.Categorias.Add(categoria);
                 this.Banco.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(assunto);
+            return View(categoria);
         }
 
         public IActionResult Edit(int id)
         {
-            var assunto = this.Banco.Assuntos.FirstOrDefault(_ => _.AssuntoID == id);
+            var categoria = this.Banco.Categorias.FirstOrDefault(_ => _.CategoriaID == id);
 
-            if (assunto == null)
+            if (categoria == null)
             {
                 NotFound();
             }
-            return View(assunto);
+            return View(categoria);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Assunto assunto)
+        public IActionResult Edit(Categoria categoria)
         {
             if (ModelState.IsValid)
             {
-                this.Banco.Entry(assunto).State = EntityState.Modified;
+                this.Banco.Entry(categoria).State = EntityState.Modified;
                 this.Banco.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(assunto);
+            return View(categoria);
         }
         public IActionResult Delete(int id)
         {
-            var assunto = this.Banco.Assuntos.FirstOrDefault(_ => _.AssuntoID == id);
-            if (assunto == null)
+            var categoria = this.Banco.Categorias.FirstOrDefault(_ => _.CategoriaID == id);
+            if (categoria == null)
             {
                 return NotFound();
             }
 
-            this.Banco.Remove(assunto);
+            this.Banco.Remove(categoria);
             return View();
         }
     }

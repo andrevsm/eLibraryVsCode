@@ -1,0 +1,58 @@
+@model List<eLibrary1.Models.Categoria>
+
+<h3>Categorias</h3>
+
+<a href="/Categorias/Create" class="btn btn-primary">Cadastrar Categoria</a>
+
+<p>Total: @Model.Count()</p>
+
+<table class="table table-hover">
+    <thead>
+        <th>ID</th>
+        <th>Nome</th>
+    </thead>
+    <tbody style="text-align: center">
+        @foreach(var categoria in Model){
+            <tr>
+                <td>@categoria.CategoriaID</td>
+                <td>@categoria.Nome</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="/Categorias/Edit/@categoria.CategoriaID" class="btn btn-success ">Editar</a>
+                        <a data-myval="/Categorias/Delete/@categoria.CategoriaID" href="" id="btnExcluir" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger">Excluir</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" > 
+    <div class="modal-dialog" role="document"> 
+        <div class="modal-content"> 
+            <div class="modal-header"> 
+                <h4 class="modal-title" >Excluir</h4> 
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div> 
+            <div class="modal-body"> 
+                <p>A Categoria será excluída.</p> 
+                <p>Deseja continuar?</p> 
+            </div> 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Não</button> 
+                <a class="btn btn-danger btn-excluir" id="excluir" href="">Sim</a> 
+            </div> 
+        </div>
+    </div>
+</div>
+
+@section scripts {
+   <script>
+        $("#btnExcluir").click(function(){
+            var id = $("#btnExcluir").data('myval');
+            $(".btn-excluir").attr("href", id);
+        });        
+   </script>
+}
