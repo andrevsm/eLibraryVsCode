@@ -3,8 +3,136 @@
 @{
     ViewBag.Title = "Cadastro de Livros";
 }
-<h3>@ViewBag.Title</h3>
-@using (Html.BeginForm()) {
+<br />
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>@ViewBag.Title</legend>
+
+<!-- Text input Titulo-->
+<div class="form-group">
+  <label class="col-md-1 control-label" for="Titulo">Título</label>  
+  <div class="col-md-2">
+    <input id="Titulo" name="Titulo" type="text" placeholder="Título" class="form-control input-md">
+  </div>
+
+  <!-- Select Editora-->
+  <label class="col-md-1 control-label" for="Editora">Editora</label>  
+  <div class="col-md-2">
+    <input id="Editora" name="_Editora" type="text" placeholder="Editora" class="form-control input-md">
+  </div>
+
+  <!-- Text input Edição-->
+  <label class="col-md-1 control-label" for="Edicao">Edição</label>
+  <div class="col-md-2">
+    <input id="Edicao" name="Edicao" type="text" placeholder="Edição" class="form-control input-md" required="">  
+  </div>
+
+</div>
+
+<!-- Select Categoria-->
+<div class="form-group">
+  <label class="col-md-1 control-label" for="Categoria">Categoria</label>  
+  <div class="col-md-2">
+    <input id="Categoria" name="_Categoria" type="text" placeholder="Categoria" class="form-control input-md">
+  </div>
+
+  <!-- Text input ISBN-->
+  <label class="col-md-1 control-label" for="ISBN">ISBN</label>  
+  <div class="col-md-2">
+    <input id="ISBN" name="ISBN" type="text" placeholder="ISBN" class="form-control input-md" required="">
+  </div>
+
+  <!-- Text input Autor-->
+  <label class="col-md-1 control-label" for="Autor">Autor</label>  
+  <div class="col-md-2">
+    <input id="Autor" name="Autor" type="text" placeholder="Autor" class="form-control input-md" required="">   
+  </div>
+
+ 
+
+</div>
+
+<!-- Select Assunto-->
+<div class="form-group">
+  <label class="col-md-1 control-label" for="Assunto">Assunto</label>  
+  <div class="col-md-2">
+    <input id="Assunto" name="_Assunto" type="text" placeholder="Assunto" class="form-control input-md">
+  </div>
+
+  <!-- Text input Páginas-->
+  <label class="col-md-1 control-label" for="Paginas">Páginas</label>
+  <div class="col-md-2">
+    <input id="Paginas" name="Páginas" type="text" placeholder="Paginas" class="form-control input-md" required=""> 
+  </div>
+
+  <!-- Text input Ano-->
+  <label class="col-md-1 control-label" for="Ano">Ano</label>  
+  <div class="col-md-2">
+    <input id="Ano" name="Ano" type="text" placeholder="Ano" class="form-control input-md" required="">  
+  </div>
+
+</div>
+
+<!-- Text input Origem-->
+<div class="form-group">
+  <label class="col-md-1 control-label" for="Origem">Origem</label>  
+  <div class="col-md-2">
+    <input id="Origem" name="Origem" type="text" placeholder="Origem" class="form-control input-md" required="">
+  </div>
+
+   <!-- Text input Idioma-->
+  <label class="col-md-1 control-label" for="Idioma">Idioma</label>  
+  <div class="col-md-2">
+    <input id="Idioma" name="Idioma" type="text" placeholder="Idioma" class="form-control input-md" required="">  
+  </div>
+  
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-1 control-label" for="submit"></label>
+  <div class="col-md-4">
+    <button id="submit" name="submit" class="btn btn-primary">Cadastrar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+<div class="container">
+	<div class="row">
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- @using (Html.BeginForm()) {
   <form method="POST">
     <div class="form-group">
       <label for="Titulo">Título</label>
@@ -23,4 +151,4 @@
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </div>
   </form>
-}
+} -->
