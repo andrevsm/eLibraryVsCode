@@ -1,0 +1,26 @@
+@model eLibrary1.Models.Livro
+
+@{
+    ViewBag.Title = "Cadastro de Livros";
+}
+<h3>@ViewBag.Title</h3>
+@using (Html.BeginForm()) {
+  <form method="POST">
+    <div class="form-group">
+      <label for="Titulo">Título</label>
+      <input type="text" name="Titulo" size="30" maxlength="100"/><br />
+      <label for="ISBN">ISBN</label>
+      <input type="text" name="ISBN" size="30" maxlength="100"/><br />
+      <label for="Paginas">Páginas</label>
+      <input type="text" name="Paginas" size="30" maxlength="100"/><br />
+      <label for="Edicao">Edição</label>
+      <input type="text" name="Edicao" size="30" maxlength="100"/><br />
+      <label for="Autor">Autor</label>
+      <input type="text" name="Autor" size="30" maxlength="100"/><br />
+    </div>
+    
+    <div class=button style="padding-top: 10px">
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </div>
+  </form>
+}

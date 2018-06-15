@@ -1,0 +1,13 @@
+/Users/andrevsm/Faculdade/AspNet/eLibrary1/bin/Debug/netcoreapp2.0/app.db
+/Users/andrevsm/Faculdade/AspNet/eLibrary1/bin/Debug/netcoreapp2.0/eLibrary1.deps.json
+/Users/andrevsm/Faculdade/AspNet/eLibrary1/bin/Debug/netcoreapp2.0/eLibrary1.runtimeconfig.json
+/Users/andrevsm/Faculdade/AspNet/eLibrary1/bin/Debug/netcoreapp2.0/eLibrary1.runtimeconfig.dev.json
+/Users/andrevsm/Faculdade/AspNet/eLibrary1/bin/Debug/netcoreapp2.0/eLibrary1.dll
+/Users/andrevsm/Faculdade/AspNet/eLibrary1/bin/Debug/netcoreapp2.0/eLibrary1.pdb
+/Users/andrevsm/Faculdade/AspNet/eLibrary1/obj/Debug/netcoreapp2.0/eLibrary1.csprojAssemblyReference.cache
+/Users/andrevsm/Faculdade/AspNet/eLibrary1/obj/Debug/netcoreapp2.0/eLibrary1.csproj.CoreCompileInputs.cache
+/Users/andrevsm/Faculdade/AspNet/eLibrary1/obj/Debug/netcoreapp2.0/UserSecretsAssemblyInfo.cs
+/Users/andrevsm/Faculdade/AspNet/eLibrary1/obj/Debug/netcoreapp2.0/eLibrary1.AssemblyInfoInputs.cache
+/Users/andrevsm/Faculdade/AspNet/eLibrary1/obj/Debug/netcoreapp2.0/eLibrary1.AssemblyInfo.cs
+/Users/andrevsm/Faculdade/AspNet/eLibrary1/obj/Debug/netcoreapp2.0/eLibrary1.dll
+/Users/andrevsm/Faculdade/AspNet/eLibrary1/obj/Debug/netcoreapp2.0/eLibrary1.pdb

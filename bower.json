@@ -1,0 +1,17 @@
+{
+  "name": "eLibrary1",
+  "authors": [
+    "André Vítor S. Melo <andrevsmelo@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
