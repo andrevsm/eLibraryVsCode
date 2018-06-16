@@ -1,13 +1,13 @@
-@model List<eLibrary1.Models.Livro>
+@model eLibrary1.Models.LivroViewModel
 
 <h3>Livros</h3>
 
 <a href="/Livros/Create" class="btn btn-primary">Cadastrar Livro</a>
 
-<p>Total: @Model.Count()</p>
+<p>Total: @Model.Livros.Count()</p>
 
 <table class="table table-hover">
-    <thead>
+    <thead style="align: center">
         <th>ID</th>
         <th>Titulo</th>
         <th>Categoria</th>
@@ -15,15 +15,16 @@
         <th>Editora</th>
     </thead>
     <tbody style="text-align: center">
-        @foreach(var livro in Model){
+        @foreach(var livro in Model.Livros){
             <tr>
                 <td>@livro.LivroID</td>
                 <td>@livro.Titulo</td>
-                <td>@livro._Categoria</td>
-                <td>@livro._Assunto</td>
-                <td>@livro._Editora</td>
+                <td>@livro._Categoria.Nome</td>
+                <td>@livro._Assunto.Nome</td>
+                <td>@livro._Editora.Nome</td>
                 <td>
                     <div class="btn-group">
+                        <a href="/Livros/Details/@livro.LivroID" class="btn btn-success ">Detalhes</a>
                         <a href="/Livros/Edit/@livro.LivroID" class="btn btn-success ">Editar</a>
                         <a data-myval="/Livros/Delete/@livro.LivroID" href="" id="btnExcluir" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger">Excluir</a>
                     </div>

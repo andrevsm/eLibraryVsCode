@@ -17,10 +17,10 @@
     <input id="Titulo" name="Titulo" type="text" placeholder="Título" class="form-control input-md">
   </div>
 
-  <!-- Select Editora-->
-  <label class="col-md-1 control-label" for="Editora">Editora</label>  
+  <!-- Select Origem-->
+  <label class="col-md-1 control-label" for="Origem">Origem</label>  
   <div class="col-md-2">
-    <input id="Editora" name="_Editora" type="text" placeholder="Editora" class="form-control input-md">
+    <input id="Origem" name="Origem" type="text" placeholder="Origem" class="form-control input-md" required="">
   </div>
 
   <!-- Text input Edição-->
@@ -35,7 +35,7 @@
 <div class="form-group">
   <label class="col-md-1 control-label" for="Categoria">Categoria</label>  
   <div class="col-md-2">
-    <input id="Categoria" name="_Categoria" type="text" placeholder="Categoria" class="form-control input-md">
+    @Html.DropDownList("CategoriaID", null, new { @class = "form-control" })
   </div>
 
   <!-- Text input ISBN-->
@@ -58,13 +58,13 @@
 <div class="form-group">
   <label class="col-md-1 control-label" for="Assunto">Assunto</label>  
   <div class="col-md-2">
-    <input id="Assunto" name="_Assunto" type="text" placeholder="Assunto" class="form-control input-md">
+    @Html.DropDownList("AssuntoID", null, new { @class = "form-control" })
   </div>
 
   <!-- Text input Páginas-->
   <label class="col-md-1 control-label" for="Paginas">Páginas</label>
   <div class="col-md-2">
-    <input id="Paginas" name="Páginas" type="text" placeholder="Paginas" class="form-control input-md" required=""> 
+    <input id="Paginas" name="Paginas" type="text" placeholder="Paginas" class="form-control input-md" required=""> 
   </div>
 
   <!-- Text input Ano-->
@@ -75,11 +75,11 @@
 
 </div>
 
-<!-- Text input Origem-->
+<!-- Text input Editora-->
 <div class="form-group">
-  <label class="col-md-1 control-label" for="Origem">Origem</label>  
+  <label class="col-md-1 control-label" for="Editora">Editora</label>  
   <div class="col-md-2">
-    <input id="Origem" name="Origem" type="text" placeholder="Origem" class="form-control input-md" required="">
+    @Html.DropDownList("EditoraID", null, new { @class = "form-control" })
   </div>
 
    <!-- Text input Idioma-->
@@ -104,51 +104,3 @@
 	<div class="row">
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- @using (Html.BeginForm()) {
-  <form method="POST">
-    <div class="form-group">
-      <label for="Titulo">Título</label>
-      <input type="text" name="Titulo" size="30" maxlength="100"/><br />
-      <label for="ISBN">ISBN</label>
-      <input type="text" name="ISBN" size="30" maxlength="100"/><br />
-      <label for="Paginas">Páginas</label>
-      <input type="text" name="Paginas" size="30" maxlength="100"/><br />
-      <label for="Edicao">Edição</label>
-      <input type="text" name="Edicao" size="30" maxlength="100"/><br />
-      <label for="Autor">Autor</label>
-      <input type="text" name="Autor" size="30" maxlength="100"/><br />
-    </div>
-    
-    <div class=button style="padding-top: 10px">
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-    </div>
-  </form>
-} -->

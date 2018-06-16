@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace eLibrary1.Controllers
 {
@@ -19,17 +20,41 @@ namespace eLibrary1.Controllers
         }    
         // GET: Livros
         public IActionResult Index()
-        {
-            return View(this.Banco.Livros.ToList());
+        {   
+            var livros = this.Banco.Livros.ToList();
+            var editoras = this.Banco.Editoras.ToList();
+            var assuntos = this.Banco.Assuntos.ToList();
+            var categorias = this.Banco.Categorias.ToList();
+
+            var model = new LivroViewModel(livros, categorias, editoras, assuntos);
+
+            return View(model);
         }
         public IActionResult Create()
         {
+            ViewBag.EditoraID = new SelectList (
+                this.Banco.Editoras.ToList(),
+                "EditoraID",
+                "Nome"
+                );
+
+                ViewBag.CategoriaID = new SelectList (
+                this.Banco.Categorias.ToList(),
+                "CategoriaID",
+                "Nome"
+                );
+
+                ViewBag.AssuntoID = new SelectList (
+                this.Banco.Assuntos.ToList(),
+                "AssuntoID",
+                "Nome"
+                );
             return View();
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Livro livro)
+        public IActionResult Create(Livro livro, string editoraId, string categoriaId, string assuntoId)
         {
             if (ModelState.IsValid)
             {
@@ -37,6 +62,26 @@ namespace eLibrary1.Controllers
                 this.Banco.SaveChanges();
                 return RedirectToAction("Index");
             }
+             ViewBag.EditoraID = new SelectList (
+                this.Banco.Editoras.ToList(),
+                "EditoraID",
+                "Nome",
+                editoraId
+                );
+
+                ViewBag.CategoriaID = new SelectList (
+                this.Banco.Categorias.ToList(),
+                "CategoriaID",
+                "Nome",
+                categoriaId
+                );
+
+                ViewBag.AssuntoID = new SelectList (
+                this.Banco.Assuntos.ToList(),
+                "AssuntoID",
+                "Nome",
+                assuntoId
+                );
             return View(livro);
         }
         

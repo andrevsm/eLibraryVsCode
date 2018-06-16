@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using eLibrary1.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace eLibrary1.Controllers
 {
@@ -30,7 +31,7 @@ namespace eLibrary1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Editora editora)
+        public IActionResult Create(Editora editora, string editoraId)
         {
             if (ModelState.IsValid)
             {
