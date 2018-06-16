@@ -74,21 +74,22 @@
         <div class="form-group">
             <label class="control-label col-md-2">Categoria</label>
             <div class="col-md-2">
-                @Html.DropDownList("CategoriaID", null, new { @class = "form-control" })
+                @Html.DropDownList("CategoriaID", null, "Selecione", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Livro.CategoriaID)
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-md-2">Editora</label>
             <div class="col-md-2">
-                @Html.DropDownList("EditoraID", null, new { @class = "form-control" })
+                @Html.DropDownList("EditoraID", null, "Selecione", new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-md-2">Assunto</label>
             <div class="col-md-2">
-                @Html.DropDownList("AssuntoID", null, new { @class = "form-control" })
+                @Html.DropDownList("AssuntoID", null, "Selecione", new { @class = "form-control" })
             </div>
         </div>
 
@@ -99,4 +100,8 @@
             </div>
         </div>
     </div>
+}
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
 }

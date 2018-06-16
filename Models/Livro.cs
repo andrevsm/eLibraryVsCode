@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -19,10 +20,16 @@ namespace eLibrary1.Models
         public string Origem { get; set; }
         public string Idioma { get; set; }
         public int CategoriaID { get; set; }
+        
+        [ForeignKey("CategoriaID")]
         public virtual Categoria _Categoria { get; set; }
         public int EditoraID { get; set; }
+        
+        [ForeignKey("EditoraID")]
         public virtual Editora _Editora { get; set; }
         public int AssuntoID { get; set; }
+        
+        [ForeignKey("AssuntoID")]
         public virtual Assunto _Assunto { get; set; }
     }
 }

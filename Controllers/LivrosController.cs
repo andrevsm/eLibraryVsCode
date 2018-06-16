@@ -138,6 +138,10 @@ namespace eLibrary1.Controllers
         {
             if (ModelState.IsValid)
             {
+                livro.CategoriaID = int.Parse(categoriaId);
+                livro.AssuntoID = int.Parse(assuntoId);
+                livro.EditoraID = int.Parse(editoraId);
+
                 this.Banco.Entry(livro).State = EntityState.Modified;
                 this.Banco.SaveChanges();
                 return RedirectToAction("Index");

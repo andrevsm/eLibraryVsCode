@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using eLibrary1.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace eLibrary1.Models
 {
@@ -18,6 +19,8 @@ namespace eLibrary1.Models
         }
 
         public Livro Livro { get; set; }
+
+        [Required(ErrorMessage = "Selecione uma categoria da lista")]
         public List<Categoria> Categorias { get; set; }
         public List<Editora> Editoras { get; set; }
         public List<Assunto> Assuntos { get; set; }
