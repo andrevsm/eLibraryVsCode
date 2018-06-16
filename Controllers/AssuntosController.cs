@@ -13,9 +13,10 @@ namespace eLibrary1.Controllers
     {
         public BancoDbContext Banco { get; set; }
 
-        public AssuntosController(BancoDbContext banco){
+        public AssuntosController(BancoDbContext banco)
+        {
             this.Banco = banco;
-        }    
+        }
 
         public IActionResult Index()
         {
@@ -58,19 +59,19 @@ namespace eLibrary1.Controllers
             {
                 this.Banco.Entry(assunto).State = EntityState.Modified;
                 this.Banco.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("/Assuntos/Index");
             }
             return View(assunto);
         }
         public IActionResult Delete(int id)
         {
             var assunto = this.Banco.Assuntos.FirstOrDefault(_ => _.AssuntoID == id);
-            if (assunto == null)
+            if (assunto != null)
             {
-                return NotFound();
+                this.Banco.Remove(assunto);
+                this.Banco.SaveChanges();
+                return RedirectToAction("Index");
             }
-
-            this.Banco.Remove(assunto);
             return View();
         }
     }

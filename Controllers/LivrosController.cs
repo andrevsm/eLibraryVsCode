@@ -1,5 +1,5 @@
-using eLibrary1.Models;
 using eLibrary1.Data;
+using eLibrary1.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,12 +15,14 @@ namespace eLibrary1.Controllers
     {
         public BancoDbContext Banco { get; set; }
 
-        public LivrosController(BancoDbContext banco){
+        public LivrosController(BancoDbContext banco)
+        {
             this.Banco = banco;
-        }    
+        }
+
         // GET: Livros
         public IActionResult Index()
-        {   
+        {
             var livros = this.Banco.Livros.ToList();
             var editoras = this.Banco.Editoras.ToList();
             var assuntos = this.Banco.Assuntos.ToList();
@@ -30,28 +32,30 @@ namespace eLibrary1.Controllers
 
             return View(model);
         }
+
         public IActionResult Create()
         {
-            ViewBag.EditoraID = new SelectList (
+            ViewBag.EditoraID = new SelectList(
                 this.Banco.Editoras.ToList(),
                 "EditoraID",
                 "Nome"
                 );
 
-                ViewBag.CategoriaID = new SelectList (
-                this.Banco.Categorias.ToList(),
-                "CategoriaID",
-                "Nome"
-                );
+            ViewBag.CategoriaID = new SelectList(
+            this.Banco.Categorias.ToList(),
+            "CategoriaID",
+            "Nome"
+            );
 
-                ViewBag.AssuntoID = new SelectList (
-                this.Banco.Assuntos.ToList(),
-                "AssuntoID",
-                "Nome"
-                );
+            ViewBag.AssuntoID = new SelectList(
+            this.Banco.Assuntos.ToList(),
+            "AssuntoID",
+            "Nome"
+            );
+
             return View();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Livro livro, string editoraId, string categoriaId, string assuntoId)
@@ -62,61 +66,116 @@ namespace eLibrary1.Controllers
                 this.Banco.SaveChanges();
                 return RedirectToAction("Index");
             }
-             ViewBag.EditoraID = new SelectList (
-                this.Banco.Editoras.ToList(),
-                "EditoraID",
-                "Nome",
-                editoraId
-                );
 
-                ViewBag.CategoriaID = new SelectList (
-                this.Banco.Categorias.ToList(),
-                "CategoriaID",
-                "Nome",
-                categoriaId
-                );
+            ViewBag.EditoraID = new SelectList(
+               this.Banco.Editoras.ToList(),
+               "EditoraID",
+               "Nome",
+               editoraId
+               );
 
-                ViewBag.AssuntoID = new SelectList (
-                this.Banco.Assuntos.ToList(),
-                "AssuntoID",
-                "Nome",
-                assuntoId
-                );
+            ViewBag.CategoriaID = new SelectList(
+            this.Banco.Categorias.ToList(),
+            "CategoriaID",
+            "Nome",
+            categoriaId
+            );
+
+            ViewBag.AssuntoID = new SelectList(
+            this.Banco.Assuntos.ToList(),
+            "AssuntoID",
+            "Nome",
+            assuntoId
+            );
+
             return View(livro);
         }
-        
-        public IActionResult Edit(int id)
-          {
-        var livro = this.Banco.Livros.FirstOrDefault(_ => _.LivroID == id);
 
-            if (livro == null)
-            {
-                NotFound();
-            }
-            return View(livro);
+        public IActionResult Details(int id)
+        {
+            var livro = this.Banco.Livros.FirstOrDefault(_ => _.LivroID == id);
+            var editoras = this.Banco.Editoras.ToList();
+            var assuntos = this.Banco.Assuntos.ToList();
+            var categorias = this.Banco.Categorias.ToList();
+
+            var model = new DetailsViewModel(livro, categorias, editoras, assuntos);
+
+            return View(model);
+        }
+        public IActionResult Edit(int id)
+        {
+            var livro = this.Banco.Livros.FirstOrDefault(_ => _.LivroID == id);
+            var editoras = this.Banco.Editoras.ToList();
+            var assuntos = this.Banco.Assuntos.ToList();
+            var categorias = this.Banco.Categorias.ToList();
+
+            ViewBag.EditoraID = new SelectList(
+                this.Banco.Editoras.ToList(),
+                "EditoraID",
+                "Nome"
+                );
+
+            ViewBag.CategoriaID = new SelectList(
+            this.Banco.Categorias.ToList(),
+            "CategoriaID",
+            "Nome"
+            );
+
+            ViewBag.AssuntoID = new SelectList(
+            this.Banco.Assuntos.ToList(),
+            "AssuntoID",
+            "Nome"
+            );
+
+            var model = new EditViewModel(livro, categorias, editoras, assuntos);
+
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Livro liv)
+        public IActionResult Edit(Livro livro, string editoraId, string categoriaId, string assuntoId)
         {
             if (ModelState.IsValid)
             {
-                this.Banco.Entry(liv).State = EntityState.Modified;
+                this.Banco.Entry(livro).State = EntityState.Modified;
                 this.Banco.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(liv);
+
+            ViewBag.EditoraID = new SelectList(
+               this.Banco.Editoras.ToList(),
+               "EditoraID",
+               "Nome",
+               editoraId
+               );
+
+            ViewBag.CategoriaID = new SelectList(
+            this.Banco.Categorias.ToList(),
+            "CategoriaID",
+            "Nome",
+            categoriaId
+            );
+
+            ViewBag.AssuntoID = new SelectList(
+            this.Banco.Assuntos.ToList(),
+            "AssuntoID",
+            "Nome",
+            assuntoId
+            );
+
+            return View(livro);
         }
         public IActionResult Delete(int id)
         {
             var livro = this.Banco.Livros.FirstOrDefault(_ => _.LivroID == id);
-            if (livro == null)
-            {
-                return NotFound();
-            }
 
-            this.Banco.Remove(livro);
+            if (livro != null)
+            {
+                this.Banco.Remove(livro);
+                this.Banco.SaveChanges();
+                return RedirectToAction("Index");
+            }
             return View();
         }
     }

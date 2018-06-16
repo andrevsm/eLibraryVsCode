@@ -13,9 +13,10 @@ namespace eLibrary1.Controllers
     {
         public BancoDbContext Banco { get; set; }
 
-        public CategoriasController(BancoDbContext banco){
+        public CategoriasController(BancoDbContext banco)
+        {
             this.Banco = banco;
-        }    
+        }
 
         public IActionResult Index()
         {
@@ -41,6 +42,7 @@ namespace eLibrary1.Controllers
             return View(categoria);
         }
 
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             var categoria = this.Banco.Categorias.FirstOrDefault(_ => _.CategoriaID == id);
@@ -53,26 +55,27 @@ namespace eLibrary1.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Edit(Categoria categoria)
         {
-            if (ModelState.IsValid)
+            if (categoria != null)
             {
                 this.Banco.Entry(categoria).State = EntityState.Modified;
                 this.Banco.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(categoria);
         }
+
         public IActionResult Delete(int id)
         {
             var categoria = this.Banco.Categorias.FirstOrDefault(_ => _.CategoriaID == id);
-            if (categoria == null)
+            if (categoria != null)
             {
-                return NotFound();
+                this.Banco.Remove(categoria);
+                this.Banco.SaveChanges();
+                return RedirectToAction("Index");
             }
-
-            this.Banco.Remove(categoria);
             return View();
         }
     }

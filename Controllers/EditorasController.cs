@@ -68,12 +68,12 @@ namespace eLibrary1.Controllers
         public IActionResult Delete(int id)
         {
             var editora = this.Banco.Editoras.FirstOrDefault(_ => _.EditoraID == id);
-            if (editora == null)
+            if (editora != null)
             {
-                return NotFound();
+                this.Banco.Remove(editora);
+                this.Banco.SaveChanges();
+                return RedirectToAction("Index");
             }
-
-            this.Banco.Remove(editora);
             return View();
         }
     }

@@ -1,15 +1,13 @@
 @model List<eLibrary1.Models.Categoria>
 
-<h3>Categorias</h3>
-
-<a href="/Categorias/Create" class="btn btn-primary">Cadastrar Categoria</a>
-
-<p>Total: @Model.Count()</p>
+<div class="container" style="text-align: center">
+    <h1>Categorias</h1>
+</div>
 
 <table class="table table-hover">
     <thead>
-        <th>ID</th>
-        <th>Nome</th>
+        <th style="text-align: center">ID</th>
+        <th style="text-align: center">Nome</th>
     </thead>
     <tbody style="text-align: center">
         @foreach(var categoria in Model){
@@ -26,6 +24,11 @@
         }
     </tbody>
 </table>
+
+<div class="container" style="text-align: center">
+    <h3 style="text-align: left">Total: @Model.Count()</h3>
+    <a href="/Categorias/Create" class="btn btn-primary">Cadastrar Categoria</a>
+</div>
 
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" > 
     <div class="modal-dialog" role="document"> 
