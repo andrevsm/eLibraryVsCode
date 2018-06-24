@@ -19,7 +19,7 @@ namespace eLibrary1.Models.AccountViewModels
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Essas senhas não coincidem. Tente novamente.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

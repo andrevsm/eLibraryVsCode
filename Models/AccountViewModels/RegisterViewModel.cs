@@ -9,7 +9,7 @@ namespace eLibrary1.Models.AccountViewModels
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "O e-mail informado não é um e-mail válido.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -21,7 +21,10 @@ namespace eLibrary1.Models.AccountViewModels
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Essas senhas não coincidem. Tente novamente.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        public bool IsAdministrator { get; set; }
     }
 }

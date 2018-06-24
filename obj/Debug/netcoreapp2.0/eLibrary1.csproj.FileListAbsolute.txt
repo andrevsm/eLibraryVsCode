@@ -1,4 +1,3 @@
-/Users/andrevsm/Faculdade/AspNet/eLibrary1/bin/Debug/netcoreapp2.0/app.db
 /Users/andrevsm/Faculdade/AspNet/eLibrary1/bin/Debug/netcoreapp2.0/eLibrary1.deps.json
 /Users/andrevsm/Faculdade/AspNet/eLibrary1/bin/Debug/netcoreapp2.0/eLibrary1.runtimeconfig.json
 /Users/andrevsm/Faculdade/AspNet/eLibrary1/bin/Debug/netcoreapp2.0/eLibrary1.runtimeconfig.dev.json
