@@ -1,0 +1,7 @@
+@using eLibrary1.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{ 
+    ViewData["UserId"] = _userManager.GetUserId(HttpContext.User);
+}

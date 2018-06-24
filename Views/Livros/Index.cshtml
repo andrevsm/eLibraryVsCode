@@ -1,41 +1,105 @@
 @model eLibrary1.Models.LivroViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
+@{ 
+    var user = await UserManager.GetUserAsync(User);
+}
+ 
 <div class="container" style="text-align: center">
     <h1>Livros</h1>
 </div>
 
-<table class="table table-hover" style="text-align: center">
-    <thead>
-        <th style="text-align: center">ID</th>
-        <th style="text-align: center">Titulo</th>
-        <th style="text-align: center">Categoria</th>
-        <th style="text-align: center">Assunto</th>
-        <th style="text-align: center">Editora</th>
-    </thead>
-    <tbody>
-        @foreach(var livro in Model.Livros){
-            <tr>
-                <td>@livro.LivroID</td>
-                <td>@livro.Titulo</td>
-                <td>@livro._Categoria.Nome</td>
-                <td>@livro._Assunto.Nome</td>
-                <td>@livro._Editora.Nome</td>
-                <td>
-                    <div class="btn-group">
-                        <a href="/Livros/Details/@livro.LivroID" class="btn btn-info ">Detalhes</a>
-                        <a href="/Livros/Edit/@livro.LivroID" class="btn btn-success ">Editar</a>
-                        <a data-myval="/Livros/Delete/@livro.LivroID" href="" id="btnExcluir" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger">Excluir</a>
-                    </div>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@if (user != null){
+    @if (user.IsAdministrator == true){
 
-<div class="container" style="text-align: center">
-    <h3 style="text-align: left">Total: @Model.Livros.Count()</h3>
-    <a href="/Livros/Create" class="btn btn-primary">Cadastrar Livro</a>
-</div>
+        <table class="table table-hover" style="text-align: center">
+            <thead>
+                <th style="text-align: center">ID</th>
+                <th style="text-align: center">Titulo</th>
+                <th style="text-align: center">Categoria</th>
+                <th style="text-align: center">Assunto</th>
+                <th style="text-align: center">Editora</th>
+            </thead>
+            <tbody>
+                @foreach(var livro in Model.Livros){
+                    <tr>
+                        <td>@livro.LivroID</td>
+                        <td>@livro.Titulo</td>
+                        <td>@livro._Categoria.Nome</td>
+                        <td>@livro._Assunto.Nome</td>
+                        <td>@livro._Editora.Nome</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="/Livros/Details/@livro.LivroID" class="btn btn-primary">Detalhes</a>
+                                <a href="/Livros/Edit/@livro.LivroID" class="btn btn-success ">Editar</a>
+                                <a data-myval="/Livros/Delete/@livro.LivroID" href="" id="btnExcluir" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger">Excluir</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    
+        <div class="container" style="text-align: center">
+            <h3 style="text-align: left">Total: @Model.Livros.Count()</h3>
+            <a href="/Livros/Create" class="btn btn-primary">Cadastrar Livro</a>
+        </div>
+    } else {
+        <table class="table table-hover" style="text-align: center">
+            <thead>
+                <th style="text-align: center">ID</th>
+                <th style="text-align: center">Titulo</th>
+                <th style="text-align: center">Categoria</th>
+                <th style="text-align: center">Assunto</th>
+                <th style="text-align: center">Editora</th>
+            </thead>
+            <tbody>
+                @foreach(var livro in Model.Livros){
+                    <tr>
+                        <td>@livro.LivroID</td>
+                        <td>@livro.Titulo</td>
+                        <td>@livro._Categoria.Nome</td>
+                        <td>@livro._Assunto.Nome</td>
+                        <td>@livro._Editora.Nome</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="/Livros/Details/@livro.LivroID" class="btn btn-primary">Detalhes</a>
+                                <a href="/Reservas/Reservar/@livro.LivroID" class="btn btn-success ">Reservar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+} else {
+        <table class="table table-hover" style="text-align: center">
+            <thead>
+                <th style="text-align: center">ID</th>
+                <th style="text-align: center">Titulo</th>
+                <th style="text-align: center">Categoria</th>
+                <th style="text-align: center">Assunto</th>
+                <th style="text-align: center">Editora</th>
+            </thead>
+            <tbody>
+                @foreach(var livro in Model.Livros){
+                    <tr>
+                        <td>@livro.LivroID</td>
+                        <td>@livro.Titulo</td>
+                        <td>@livro._Categoria.Nome</td>
+                        <td>@livro._Assunto.Nome</td>
+                        <td>@livro._Editora.Nome</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="/Livros/Details/@livro.LivroID" class="btn btn-primary">Detalhes</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 
 @*Bootstrap Dialog*@
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" > 
@@ -58,6 +122,8 @@
         </div>
     </div>
 </div>
+
+
 
 @section scripts {
    <script>

@@ -1,4 +1,10 @@
 @model List<eLibrary1.Models.Assunto>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{ 
+    var user = await UserManager.GetUserAsync(User);
+}
 
 <div class="container" style="text-align: center">
     <h1>Assuntos</h1>
@@ -15,20 +21,28 @@
                 <td>@assunto.AssuntoID</td>
                 <td>@assunto.Nome</td>
                 <td>
-                    <div class="btn-group">
-                        <a href="/Assuntos/Edit/@assunto.AssuntoID" class="btn btn-success ">Editar</a>
-                        <a data-myval="/Assuntos/Delete/@assunto.AssuntoID" href="" id="btnExcluir" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger">Excluir</a>
-                    </div>
+                    @if (user != null){
+                        @if (user.IsAdministrator == true){
+                            <div class="btn-group">
+                                <a href="/Assuntos/Edit/@assunto.AssuntoID" class="btn btn-success ">Editar</a>
+                                <a data-myval="/Assuntos/Delete/@assunto.AssuntoID" href="" id="btnExcluir" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger">Excluir</a>
+                            </div>
+                        }
+                    }
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<div class="container" style="text-align: center">
-    <h3 style="text-align: left">Total: @Model.Count()</h3>
-    <a href="/Assuntos/Create" class="btn btn-primary">Cadastrar Assunto</a>
-</div>
+@if (user != null){
+    @if (user.IsAdministrator == true){
+        <div class="container" style="text-align: center">
+            <h3 style="text-align: left">Total: @Model.Count()</h3>
+            <a href="/Assuntos/Create" class="btn btn-primary">Cadastrar Assunto</a>
+        </div>
+    }
+}
 
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" > 
     <div class="modal-dialog" role="document"> 

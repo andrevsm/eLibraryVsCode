@@ -10,3 +10,4 @@
 /Users/andrevsm/Faculdade/AspNet/eLibrary1/obj/Debug/netcoreapp2.0/eLibrary1.AssemblyInfo.cs
 /Users/andrevsm/Faculdade/AspNet/eLibrary1/obj/Debug/netcoreapp2.0/eLibrary1.dll
 /Users/andrevsm/Faculdade/AspNet/eLibrary1/obj/Debug/netcoreapp2.0/eLibrary1.pdb
+/Users/andrevsm/Faculdade/AspNet/eLibrary1/bin/Debug/netcoreapp2.0/app.db

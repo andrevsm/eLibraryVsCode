@@ -15,7 +15,7 @@ namespace eLibrary1.Models
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Editora> Editoras { get; set; }
         public DbSet<Assunto> Assuntos { get; set; }
-
+        public DbSet<Reserva> Reservas { get; set; }
         override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data source=banconovo.db");
