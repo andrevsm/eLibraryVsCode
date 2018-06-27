@@ -191,6 +191,8 @@ namespace eLibrary1.Controllers
                 livro.Status = false;
             } else {
                 livro.Status = true;
+                var reserva = this.Banco.Reservas.FirstOrDefault(_ => _.LivroID == livro.LivroID);
+                this.Banco.Remove(reserva);
             }
 
             this.Banco.Entry(livro).State = EntityState.Modified;

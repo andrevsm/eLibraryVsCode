@@ -62,6 +62,7 @@ namespace eLibrary1.Controllers
                 reserva.UserID = userId;
                 reserva.Data = System.DateTime.Now;
                 
+                livro.Status = false;
                 this.Banco.Entry(livro).State = EntityState.Modified;
                 this.Banco.Reservas.Add(reserva);
                 this.Banco.SaveChanges();
@@ -75,6 +76,9 @@ namespace eLibrary1.Controllers
             var reserva = this.Banco.Reservas.FirstOrDefault(_ => _.ReservaID == id);
             if (reserva != null)
             {
+                var livro = this.Banco.Livros.FirstOrDefault(_ => _.LivroID == reserva.LivroID);
+                livro.Status = true;
+                this.Banco.Entry(livro).State = EntityState.Modified;
                 this.Banco.Remove(reserva);
                 this.Banco.SaveChanges();
                 return RedirectToAction("Index");
