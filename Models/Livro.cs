@@ -19,6 +19,7 @@ namespace eLibrary1.Models
         public int Ano { get; set; }
         public string Origem { get; set; }
         public string Idioma { get; set; }
+        public bool Status { get; set; }
         public int CategoriaID { get; set; }
         
         [ForeignKey("CategoriaID")]

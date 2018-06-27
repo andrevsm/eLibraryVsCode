@@ -10,9 +10,8 @@
     <h1>Livros</h1>
 </div>
 
-@if (user != null){
-    @if (user.IsAdministrator == true){
-
+@if (user != null) {
+    @if (user.IsAdministrator == true) {
         <table class="table table-hover" style="text-align: center">
             <thead>
                 <th style="text-align: center">ID</th>
@@ -20,6 +19,7 @@
                 <th style="text-align: center">Categoria</th>
                 <th style="text-align: center">Assunto</th>
                 <th style="text-align: center">Editora</th>
+                <th style="text-align: center">Status</th>
             </thead>
             <tbody>
                 @foreach(var livro in Model.Livros){
@@ -29,10 +29,16 @@
                         <td>@livro._Categoria.Nome</td>
                         <td>@livro._Assunto.Nome</td>
                         <td>@livro._Editora.Nome</td>
+                        @if(livro.Status) {
+                            <td>Disponível</td>
+                        } else {
+                            <td>Reservado</td>
+                        }
                         <td>
                             <div class="btn-group">
                                 <a href="/Livros/Details/@livro.LivroID" class="btn btn-primary">Detalhes</a>
                                 <a href="/Livros/Edit/@livro.LivroID" class="btn btn-success ">Editar</a>
+                                <a href="/Livros/AlterarStatus/@livro.LivroID" class="btn btn-warning ">Alterar Status</a>
                                 <a data-myval="/Livros/Delete/@livro.LivroID" href="" id="btnExcluir" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger">Excluir</a>
                             </div>
                         </td>
@@ -56,6 +62,7 @@
             </thead>
             <tbody>
                 @foreach(var livro in Model.Livros){
+                    if(livro.Status == true){
                     <tr>
                         <td>@livro.LivroID</td>
                         <td>@livro.Titulo</td>
@@ -65,10 +72,11 @@
                         <td>
                             <div class="btn-group">
                                 <a href="/Livros/Details/@livro.LivroID" class="btn btn-primary">Detalhes</a>
-                                <a href="/Reservas/Reservar/@livro.LivroID" class="btn btn-success ">Reservar</a>
+                                <a asp-route-LivroID="@livro.LivroID" asp-controller="Reservas" asp-action="Reservar" class="btn btn-success ">Reservar</a>
                             </div>
                         </td>
                     </tr>
+                    }
                 }
             </tbody>
         </table>

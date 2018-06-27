@@ -62,6 +62,7 @@ namespace eLibrary1.Controllers
         {
             if (ModelState.IsValid)
             {
+                livro.Status = true;
                 this.Banco.Livros.Add(livro);
                 this.Banco.SaveChanges();
                 return RedirectToAction("Index");
@@ -181,6 +182,21 @@ namespace eLibrary1.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        public IActionResult AlterarStatus(int id) {
+            var livro = this.Banco.Livros.FirstOrDefault(_ => _.LivroID == id);
+            
+            if(livro.Status){
+                livro.Status = false;
+            } else {
+                livro.Status = true;
+            }
+
+            this.Banco.Entry(livro).State = EntityState.Modified;
+            this.Banco.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -14,6 +14,11 @@ using eLibrary1.Models;
 using eLibrary1.Models.AccountViewModels;
 using eLibrary1.Services;
 using eLibrary1.Data;
+using eLibrary1.Controllers;
+using System.Text;
+using System.Text.Encodings.Web;
+using eLibrary1.Models.ManageViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace eLibrary1.Controllers
 {
@@ -22,21 +27,42 @@ namespace eLibrary1.Controllers
         public BancoDbContext Banco { get; set; }
         public ApplicationDbContext UserBanco { get; set; }
         
-
         public ReservasController(BancoDbContext banco)
         {
             this.Banco = banco;
+        }
+
+        public IActionResult Index() {
+            var livros = this.Banco.Livros.ToList();                    
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            List<Reserva> reservas = this.Banco.Reservas.Where(r => r.UserID == userId).ToList();
+            
+            List<Reserva> reservasUser = new List<Reserva>();
+            for (int i = 0; i < reservas.Count; i++) {
+                if(reservas[i].UserID.Equals(userId)) {
+                    reservasUser.Add(reservas[i]);
+                }
+            }
+
+            var model = new ReservasViewModel(livros, reservasUser);
+
+            return View(model);
         }
 
         public IActionResult Reservar(int livroId)
         {
             if (ModelState.IsValid)
             {
-                Reserva reserva = new Reserva();   
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 var livro = this.Banco.Livros.FirstOrDefault(_ => _.LivroID == livroId);
                 
-                reserva.LivroID = livro.LivroID;
-
+                Reserva reserva = new Reserva();   
+                
+                reserva.LivroID = livroId;
+                reserva.UserID = userId;
+                reserva.Data = System.DateTime.Now;
+                
+                this.Banco.Entry(livro).State = EntityState.Modified;
                 this.Banco.Reservas.Add(reserva);
                 this.Banco.SaveChanges();
                 return RedirectToAction("Index");
@@ -54,6 +80,13 @@ namespace eLibrary1.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        public IActionResult HistoricoReservas(){
+            var livros = this.Banco.Livros.ToList();
+            var reservas = this.Banco.Reservas.ToList();
+            var model = new ReservasViewModel(livros, reservas);
+            return View(model);
         }
     }
 }

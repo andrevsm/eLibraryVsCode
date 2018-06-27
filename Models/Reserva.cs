@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
-using eLibrary1.Models;
 
 namespace eLibrary1.Models
 {
@@ -14,6 +14,6 @@ namespace eLibrary1.Models
         public int LivroID { get; set; }
         public virtual Livro _Livro { get; set; }
         public string UserID { get; set; }
-        public virtual ApplicationUser _ApplicationUser { get; set; }
+        public DateTime Data { get; set; }
     }
 }
